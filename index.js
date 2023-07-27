@@ -4,21 +4,22 @@ const port = 3005;
 var bodyParser = require('body-parser')
 var cors = require('cors')
 app.use(bodyParser.json())
-const allowedReferers = [
-  'https://h5.zdn.vn/zapps/3771171769955037159',
-  'zbrowser://h5.zdn.vn/zapps/3771171769955037159'
-];
+const allowedOrigins = ["https://h5.zdn.vn/", "zbrowser://h5.zdn.vn/"];
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
+  }
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  return next();
+});
 app.use(cors())
 app.use((req, res, next) => {
-  const referer = req.headers.referer || '';
   const origin = req.headers.origin;
-  const allowedCors = allowedReferers.some((element) =>
-    referer.startsWith(element)
-  );
-  if (allowedCors) {
-    res.setHeader('Access-Control-Allow-Origin', origin);
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin);
   }
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   return next();
 });
 
