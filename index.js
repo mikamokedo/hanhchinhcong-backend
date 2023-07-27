@@ -3,9 +3,10 @@ const app = express();
 const port = 3005;
 var bodyParser = require('body-parser')
 var cors = require('cors')
+app.use(cors())
 app.use(bodyParser.json())
 app.get('/', function (req, res) {
-  res.send('Hello World! version 1.2');
+  res.send('Hello World! version 1.3');
 });
 // const allowedOrigins = ["https://h5.zdn.vn/", "zbrowser://h5.zdn.vn/"];
 // app.use((req, res, next) => {
