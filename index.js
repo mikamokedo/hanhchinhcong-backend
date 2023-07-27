@@ -7,22 +7,16 @@ app.use(bodyParser.json())
 const allowedOrigins = ["https://h5.zdn.vn/", "zbrowser://h5.zdn.vn/"];
 app.use((req, res, next) => {
   const origin = req.headers.origin;
-  if (allowedOrigins.includes(origin)) {
+  // if (allowedOrigins.includes(origin)) {
     res.setHeader("Access-Control-Allow-Origin", origin);
-  }
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  return next();
-});
-app.use(cors())
-app.use((req, res, next) => {
-  const origin = req.headers.origin;
-    res.setHeader("Access-Control-Allow-Origin", origin);
+  // }
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   return next();
 });
 
+
 app.get('/', function (req, res) {
-  res.send('Hello World! version 1.0');
+  res.send('Hello World! version 1.2');
 });
 
 app.post('/push-info', function (req, res) {
