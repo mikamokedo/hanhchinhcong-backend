@@ -22,9 +22,13 @@ app.use((req, res, next) => {
   return next();
 });
 
-app.post('/push-info', function (req, res) {
-  console.log(req.body)
+app.post('/', function (req, res) {
   res.send('Hello World!');
+});
+
+app.post('/push-info', function (req, res) {
+  const body = req.body;
+  res.json({data:body});
 });
 app.listen(port, function () {
   console.log('Example app listening on port 3000!');
